@@ -1,0 +1,157 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Community City - Where Hearts Connect</title>
+    <link rel="stylesheet" href="css/aurora-theme.css">
+    <!-- Google Fonts: Manrope -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Material Icons Sharp -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+</head>
+<body>
+
+    <div class="mobile-container">
+
+        <!-- ===== Screen 1: Welcome - The Magical First Impression ===== -->
+        <div id="welcome-screen" class="screen active">
+            <div class="welcome-content">
+                <img src="https://cdn.pixabay.com/photo/2023/03/06/13/58/logo-7833524_640.png" alt="Logo" class="logo">
+                <h1 class="welcome-title">Where Every <br>Heart Connects</h1>
+                <p class="welcome-subtitle">Find your people. Find your place. <br>This is your community.</p>
+                <button class="btn btn-primary">Begin Your Journey</button>
+            </div>
+        </div>
+
+        <!-- ===== Screen 2: Main Application ===== -->
+        <div id="main-app" class="screen">
+            <!-- Header (Dynamically changes) -->
+            <header class="app-header">
+                <div class="header-content">
+                    <i class="material-icons-sharp back-button">arrow_back_ios</i>
+                    <h3 class="page-title">Home</h3>
+                </div>
+                <img src="https://cdn.pixabay.com/photo/2019/08/29/12/10/model-4438821_640.jpg" alt="User Avatar" class="header-avatar">
+            </header>
+
+            <!-- Main Content Area where pages are switched -->
+            <main class="content-area">
+
+                <!-- Page 1: Home / Dashboard -->
+                <div id="home-content" class="content-page active">
+                    <div class="main-highlight-card">
+                        <div class="highlight-text">
+                            <h4>Annual Gala Night</h4>
+                            <p>Join us this Saturday for a night of celebration!</p>
+                        </div>
+                        <i class="material-icons-sharp">arrow_forward</i>
+                    </div>
+
+                    <div class="section-title">Explore Your Community</div>
+                    <div class="action-grid">
+                        <div class="action-card" data-target="directory-content" data-title="Directory"><i class="material-icons-sharp">groups</i><span>Directory</span></div>
+                        <div class="action-card" data-target="committee-content" data-title="Committees"><i class="material-icons-sharp">account_balance</i><span>Committee</span></div>
+                        <div class="action-card" data-target="gallery-content" data-title="Gallery"><i class="material-icons-sharp">photo_library</i><span>Gallery</span></div>
+                        <div class="action-card" data-target="jobs-content" data-title="Careers"><i class="material-icons-sharp">work</i><span>Careers</span></div>
+                    </div>
+
+                    <div class="section-title">Today's Moments</div>
+                    <div class="moment-card" data-target="wishes-content" data-title="Wishes">
+                        <i class="material-icons-sharp icon-birthday">cake</i>
+                        <p>It's <strong>Michael's & 2 others'</strong> birthday today. Send your wishes!</p>
+                    </div>
+                </div>
+                
+                <!-- Page 2: Member Directory -->
+                <div id="directory-content" class="content-page">
+                    <div class="search-bar">
+                        <i class="material-icons-sharp">search</i>
+                        <input type="text" placeholder="Search by name or location...">
+                    </div>
+                    <div class="member-list">
+                        <!-- Members will be injected here by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Page 3: Committee (Mantri Mandal) -->
+                <div id="committee-content" class="content-page">
+                    <!-- Committees will be injected here by JavaScript -->
+                </div>
+
+                <!-- Page 4: Gallery (Album View) -->
+                <div id="gallery-content" class="content-page">
+                    <div class="album-grid">
+                        <!-- Albums will be injected here by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Page 5: Jobs Portal -->
+                <div id="jobs-content" class="content-page">
+                    <div class="job-list">
+                        <!-- Job listings will be injected here by JavaScript -->
+                    </div>
+                    <!-- Floating Action Button for Posting a Job -->
+                    <button class="fab"><i class="material-icons-sharp">add</i></button>
+                </div>
+                
+                <!-- Page 6: Birthday & Punyatithi Wishes -->
+                <div id="wishes-content" class="content-page">
+                    <div class="section-title">Today's Birthdays</div>
+                    <div class="birthday-wish-list">
+                        <!-- Birthday wishes will be injected here by JavaScript -->
+                    </div>
+                    <div class="section-title">In Loving Memory (Punyatithi)</div>
+                    <div class="tribute-list">
+                        <!-- Tributes will be injected here by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Page 7: Profile -->
+                <div id="profile-content" class="content-page">
+                    <div class="profile-header">
+                        <img src="https://cdn.pixabay.com/photo/2019/08/29/12/10/model-4438821_640.jpg" alt="User Avatar">
+                        <h2>Jessica Lane</h2>
+                        <p>San Francisco, CA</p>
+                    </div>
+                    <div class="profile-menu">
+                        <a href="#" class="menu-item"><i class="material-icons-sharp">person_outline</i><span>Edit Profile</span></a>
+                        <a href="#" class="menu-item"><i class="material-icons-sharp">hub</i><span>My Network</span></a>
+                        <a href="#" class="menu-item"><i class="material-icons-sharp">notifications_none</i><span>Notifications</span></a>
+                        <a href="#" class="menu-item"><i class="material-icons-sharp">security</i><span>Security</span></a>
+                        <a href="#" class="menu-item logout"><i class="material-icons-sharp">logout</i><span>Logout</span></a>
+                    </div>
+                </div>
+                
+            </main>
+
+            <!-- Bottom Navigation Bar -->
+            <nav class="bottom-nav">
+                <div class="nav-item active" data-target="home-content" data-title="Home">
+                    <i class="material-icons-sharp">home</i>
+                </div>
+                <div class="nav-item" data-target="wishes-content" data-title="Wishes">
+                    <i class="material-icons-sharp">favorite_border</i>
+                </div>
+                <div class="nav-item-add">
+                    <i class="material-icons-sharp">add</i>
+                </div>
+                <div class="nav-item"> <!-- This can be linked to a future chat page -->
+                    <i class="material-icons-sharp">mail_outline</i>
+                </div>
+                <div class="nav-item" data-target="profile-content" data-title="Profile">
+                    <i class="material-icons-sharp">person_outline</i>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Link to your JavaScript file -->
+    <script src="js/app.js"></script>
+</body>
+</html>
