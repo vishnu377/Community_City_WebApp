@@ -1,157 +1,132 @@
 
 
 
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Community City - Where Hearts Connect</title>
+    <title>Kutchi Jain Samaj - Digital Legacy</title>
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="css/aurora-theme.css">
-    <!-- Google Fonts: Manrope -->
+    <!-- Google Fonts: Lora (for heritage titles) & Manrope (for modern UI text) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Material Icons Sharp -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
 </head>
 <body>
 
+    <!-- Main container that simulates a mobile phone screen -->
     <div class="mobile-container">
 
-        <!-- ===== Screen 1: Welcome - The Magical First Impression ===== -->
+        <!-- ===== Screen 1: Welcome - The Grand Entrance ===== -->
         <div id="welcome-screen" class="screen active">
             <div class="welcome-content">
-                <img src="https://cdn.pixabay.com/photo/2023/03/06/13/58/logo-7833524_640.png" alt="Logo" class="logo">
-                <h1 class="welcome-title">Where Every <br>Heart Connects</h1>
-                <p class="welcome-subtitle">Find your people. Find your place. <br>This is your community.</p>
-                <button class="btn btn-primary">Begin Your Journey</button>
+                <img src="assets/images/logo-white.png" alt="Logo" class="logo">
+                <h1 class="welcome-title">Kutchi Jain Samaj</h1>
+                <p class="welcome-subtitle">A digital registry of our heritage and community.</p>
+                <button id="login-register-btn" class="btn btn-primary">Login / Register</button>
             </div>
         </div>
+        
+        <!-- ===== Screen 2: Login ===== -->
+        <div id="login-screen" class="screen">
+            <header class="app-header standalone"><h3 class="page-title">Welcome Back</h3></header>
+             <main class="content-area">
+                <form class="form-layout">
+                    <input type="tel" placeholder="Mobile Number" required>
+                    <input type="password" placeholder="Password" required>
+                    <button type="button" id="login-submit-btn" class="btn btn-primary">Login</button>
+                    <p class="form-note">Don't have an account? <a href="#" id="go-to-register">Register here</a></p>
+                </form>
+            </main>
+        </div>
 
-        <!-- ===== Screen 2: Main Application ===== -->
-        <div id="main-app" class="screen">
-            <!-- Header (Dynamically changes) -->
+        <!-- ===== Screen 3: Registration ===== -->
+        <div id="registration-screen" class="screen">
+            <header class="app-header standalone"><h3 class="page-title">Create Profile</h3></header>
+            <main class="content-area">
+                <form id="registration-form" class="form-layout">
+                    <input type="text" name="firstName" placeholder="First Name" required>
+                    <input type="text" name="surname" placeholder="Surname" required>
+                    <select name="village" required><option value="">-- Select Your Village --</option></select>
+                    <input type="tel" name="mobile" placeholder="Mobile Number" required>
+                    <input type="password" name="password" placeholder="Create Password" required>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <p class="form-note">Already have an account? <a href="#" id="go-to-login">Login here</a></p>
+                </form>
+            </main>
+        </div>
+
+        <!-- ===== Screen 4: Main Application (The Village Universe) ===== -->
+        <div id="main-app-screen" class="screen">
             <header class="app-header">
                 <div class="header-content">
                     <i class="material-icons-sharp back-button">arrow_back_ios</i>
-                    <h3 class="page-title">Home</h3>
+                    <h3 class="page-title">Village Name</h3>
                 </div>
-                <img src="https://cdn.pixabay.com/photo/2019/08/29/12/10/model-4438821_640.jpg" alt="User Avatar" class="header-avatar">
+                <img src="assets/images/user-avatar.jpg" alt="User Avatar" class="header-avatar">
             </header>
-
-            <!-- Main Content Area where pages are switched -->
             <main class="content-area">
-
-                <!-- Page 1: Home / Dashboard -->
-                <div id="home-content" class="content-page active">
-                    <div class="main-highlight-card">
-                        <div class="highlight-text">
-                            <h4>Annual Gala Night</h4>
-                            <p>Join us this Saturday for a night of celebration!</p>
-                        </div>
-                        <i class="material-icons-sharp">arrow_forward</i>
-                    </div>
-
-                    <div class="section-title">Explore Your Community</div>
-                    <div class="action-grid">
-                        <div class="action-card" data-target="directory-content" data-title="Directory"><i class="material-icons-sharp">groups</i><span>Directory</span></div>
-                        <div class="action-card" data-target="committee-content" data-title="Committees"><i class="material-icons-sharp">account_balance</i><span>Committee</span></div>
-                        <div class="action-card" data-target="gallery-content" data-title="Gallery"><i class="material-icons-sharp">photo_library</i><span>Gallery</span></div>
-                        <div class="action-card" data-target="jobs-content" data-title="Careers"><i class="material-icons-sharp">work</i><span>Careers</span></div>
-                    </div>
-
-                    <div class="section-title">Today's Moments</div>
-                    <div class="moment-card" data-target="wishes-content" data-title="Wishes">
-                        <i class="material-icons-sharp icon-birthday">cake</i>
-                        <p>It's <strong>Michael's & 2 others'</strong> birthday today. Send your wishes!</p>
-                    </div>
+                <div id="page-container">
+                    <!-- All dynamic content (Dashboard, Lists, Details) will be loaded here -->
                 </div>
-                
-                <!-- Page 2: Member Directory -->
-                <div id="directory-content" class="content-page">
-                    <div class="search-bar">
-                        <i class="material-icons-sharp">search</i>
-                        <input type="text" placeholder="Search by name or location...">
-                    </div>
-                    <div class="member-list">
-                        <!-- Members will be injected here by JavaScript -->
-                    </div>
-                </div>
-
-                <!-- Page 3: Committee (Mantri Mandal) -->
-                <div id="committee-content" class="content-page">
-                    <!-- Committees will be injected here by JavaScript -->
-                </div>
-
-                <!-- Page 4: Gallery (Album View) -->
-                <div id="gallery-content" class="content-page">
-                    <div class="album-grid">
-                        <!-- Albums will be injected here by JavaScript -->
-                    </div>
-                </div>
-                
-                <!-- Page 5: Jobs Portal -->
-                <div id="jobs-content" class="content-page">
-                    <div class="job-list">
-                        <!-- Job listings will be injected here by JavaScript -->
-                    </div>
-                    <!-- Floating Action Button for Posting a Job -->
-                    <button class="fab"><i class="material-icons-sharp">add</i></button>
-                </div>
-                
-                <!-- Page 6: Birthday & Punyatithi Wishes -->
-                <div id="wishes-content" class="content-page">
-                    <div class="section-title">Today's Birthdays</div>
-                    <div class="birthday-wish-list">
-                        <!-- Birthday wishes will be injected here by JavaScript -->
-                    </div>
-                    <div class="section-title">In Loving Memory (Punyatithi)</div>
-                    <div class="tribute-list">
-                        <!-- Tributes will be injected here by JavaScript -->
-                    </div>
-                </div>
-
-                <!-- Page 7: Profile -->
-                <div id="profile-content" class="content-page">
-                    <div class="profile-header">
-                        <img src="https://cdn.pixabay.com/photo/2019/08/29/12/10/model-4438821_640.jpg" alt="User Avatar">
-                        <h2>Jessica Lane</h2>
-                        <p>San Francisco, CA</p>
-                    </div>
-                    <div class="profile-menu">
-                        <a href="#" class="menu-item"><i class="material-icons-sharp">person_outline</i><span>Edit Profile</span></a>
-                        <a href="#" class="menu-item"><i class="material-icons-sharp">hub</i><span>My Network</span></a>
-                        <a href="#" class="menu-item"><i class="material-icons-sharp">notifications_none</i><span>Notifications</span></a>
-                        <a href="#" class="menu-item"><i class="material-icons-sharp">security</i><span>Security</span></a>
-                        <a href="#" class="menu-item logout"><i class="material-icons-sharp">logout</i><span>Logout</span></a>
-                    </div>
-                </div>
-                
             </main>
-
-            <!-- Bottom Navigation Bar -->
             <nav class="bottom-nav">
-                <div class="nav-item active" data-target="home-content" data-title="Home">
-                    <i class="material-icons-sharp">home</i>
-                </div>
-                <div class="nav-item" data-target="wishes-content" data-title="Wishes">
-                    <i class="material-icons-sharp">favorite_border</i>
-                </div>
-                <div class="nav-item-add">
-                    <i class="material-icons-sharp">add</i>
-                </div>
-                <div class="nav-item"> <!-- This can be linked to a future chat page -->
-                    <i class="material-icons-sharp">mail_outline</i>
-                </div>
-                <div class="nav-item" data-target="profile-content" data-title="Profile">
-                    <i class="material-icons-sharp">person_outline</i>
-                </div>
+                <div class="nav-item active" data-page="home"><i class="material-icons-sharp">home</i><span>Home</span></div>
+                <div class="nav-item" data-page="Matrimony"><i class="material-icons-sharp">favorite</i><span>Matrimony</span></div>
+                <div class="nav-item-add" id="add-entry-btn"><i class="material-icons-sharp">add</i></div>
+                <div class="nav-item" data-page="Dharmik"><i class="material-icons-sharp">brightness_7</i><span>Dharmik</span></div>
+                <div class="nav-item" data-page="profile"><i class="material-icons-sharp">person</i><span>Profile</span></div>
             </nav>
         </div>
+        
+        <!-- ===== Screen 5: Add New Entry Form ===== -->
+        <div id="add-entry-screen" class="screen">
+             <header class="app-header standalone">
+                <h3 class="page-title">Create an Entry</h3>
+                <i class="material-icons-sharp close-btn">close</i>
+             </header>
+            <main class="content-area">
+                <form id="add-entry-form" class="form-layout">
+                    <label>What are you registering?</label>
+                    <select id="entry-type" required>
+                        <option value="">-- Select Entry Type --</option>
+                        <option value="New Birth">New Birth</option>
+                        <option value="New Marriage">New Marriage</option>
+                        <option value="Death">Death / Condolence</option>
+                        <option value="Tapsya">Tapsya / Dharmik Event</option>
+                        <option value="New Opening">New Business Opening</option>
+                    </select>
+                    <div id="dynamic-form-fields"></div>
+                    <button type="submit" class="btn btn-primary">Submit for Approval</button>
+                    <p class="form-note">All entries will be sent to the admin for approval.</p>
+                </form>
+            </main>
+        </div>
+
+        <!-- ===== NEW: The Profile Detail Modal ===== -->
+        <div id="detail-modal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modal-title">Profile Details</h3>
+                    <i class="material-icons-sharp close-modal-btn">close</i>
+                </div>
+                <div id="modal-body" class="modal-body">
+                    <!-- Detailed profile content will be injected here by JavaScript -->
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- Link to your JavaScript file -->
+    <!-- The heart of the app's functionality -->
     <script src="js/app.js"></script>
 </body>
 </html>

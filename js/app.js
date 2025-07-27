@@ -1,235 +1,144 @@
+// === The Digital Legacy: The Complete & Final JavaScript Logic ===
 document.addEventListener('DOMContentLoaded', () => {
 
-    const getStartedBtn = document.querySelector("#welcome-screen .btn-primary");
-    const navItems = document.querySelectorAll('.nav-item');
-    const contentPages = document.querySelectorAll('.content-page');
-    const screens = document.querySelectorAll('.screen');
-    const mainAppNav = document.querySelector('.bottom-nav');
-
-    // Function to switch between major screens
-    function showScreen(screenId) {
-        screens.forEach(s => s.classList.remove('active'));
-        document.getElementById(screenId).classList.add('active');
-    }
-
-    // Function to switch between pages within the main app
-    function showContentPage(pageId) {
-        contentPages.forEach(p => p.classList.remove('active'));
-        if (document.getElementById(pageId)) {
-            document.getElementById(pageId).classList.add('active');
-        }
-    }
-
-    // Event Listener for the "Get Started" button
-    if (getStartedBtn) {
-        getStartedBtn.addEventListener('click', () => {
-            showScreen('main-app');
-        });
-    }
-
-    // Logic for the Bottom Navigation
-    mainAppNav.addEventListener('click', (e) => {
-        const navItem = e.target.closest('.nav-item');
-        if (!navItem) return;
-
-        navItems.forEach(item => item.classList.remove('active'));
-        navItem.classList.add('active');
-
-        const targetPageId = navItem.dataset.target;
-        if (targetPageId) {
-            showContentPage(targetPageId);
-        }
-    });
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
-
-    // --- Mock Data (Simulating a database) ---
-    const members = [
-        { name: 'John Doe', location: 'New York, USA', avatar: 'assets/images/user-avatar.jpg' },
-        { name: 'Jane Smith', location: 'London, UK', avatar: 'assets/images/user-avatar.jpg' },
-        { name: 'Ravi Kumar', location: 'Mumbai, India', avatar: 'assets/images/user-avatar.jpg' },
-    ];
-
-    const committees = [
-        { name: 'Cultural Committee', members: [{ name: 'Jane Smith', role: 'President' }, { name: 'Peter Jones', role: 'Member' }] },
-        { name: 'Sports Committee', members: [{ name: 'Ravi Kumar', role: 'Head' }, { name: 'Susan Lee', role: 'Coordinator' }] }
-    ];
-
-    const albums = [
-        { name: 'Annual Gala 2024', count: 84, cover: 'assets/images/welcome-background.png' },
-        { name: 'Charity Drive', count: 52, cover: 'assets/images/welcome-background.png' },
-        { name: 'Sports Day', count: 112, cover: 'assets/images/welcome-background.png' },
-        { name: 'Holi Celebration', count: 98, cover: 'assets/images/welcome-background.png' }
-    ];
-
-    const jobs = [
-        { title: 'Senior UX Designer', company: 'Innovate Corp', type: 'Full-time', location: 'Remote' },
-        { title: 'Project Manager', company: 'BuildIt Ltd.', type: 'Contract', location: 'New York' }
-    ];
-    
-    const birthdayWishes = [
-        { name: 'Michael Brown', avatar: 'assets/images/user-avatar.jpg' }
-    ];
-    
-    const tributes = [
-        { name: 'George Williams', date: 'July 26th', avatar: 'assets/images/user-avatar.jpg' }
-    ];
-
+    // --- Mock Data Structure (The Heart of the App) ---
+    const samajData = {
+        villages: ['Mandvi', 'Bhuj', 'Anjar', 'Naliya'],
+        structure: {
+            'Jain Sandh': { icon: 'groups', subcategories: ['Members List', 'Mahajan Committee List'] },
+            'Matrimony': { icon: 'favorite', subcategories: ['New Marriage', 'Engagement', 'Boy', 'Girls', 'Divorced', 'Widower', 'Widow'], permissionRequired: true },
+            'Life Events': { icon: 'cake', subcategories: ['Birthday', 'Marriage Anniversary', 'New Born Baby', 'New Opening'] },
+            'Dharmik': { icon: 'brightness_7', subcategories: ['Jain Sangh Name', 'Tapsya', 'Pratika', 'Chomasa', 'Sheshkar'] },
+            'Daily Updates': { icon: 'newspaper', subcategories: ['Newspaper', 'Panchang', 'Congratulations', 'Thankyou', 'Social'] },
+            'Village Info': { icon: 'location_city', subcategories: ['History', 'Derasar', 'Hospital', 'Library', 'School', 'Bank', 'Police Station', 'Post Office', 'Gram Panchayat'] },
+            'Death / Condolence': { icon: 'info', isDirectContent: true, },
+        },
+        members: [
+            { name: 'Ramesh Shah', village: 'Mandvi', status: 'Male', avatar: 'assets/images/user-avatar.jpg' },
+            { name: 'Priya Mehta', village: 'Mandvi', status: 'Female', avatar: 'assets/images/user-avatar.jpg' },
+            { name: 'Aarav Gada', village: 'Mandvi', status: 'Kids', avatar: 'assets/images/user-avatar.jpg' }
+        ],
+        committees: [
+            { name: 'Derasar Committee', members: [{name: 'Ashok Shah', role: 'President'}, {name: 'Vimal Mehta', role: 'Secretary'}]},
+            { name: 'Education Committee', members: [{name: 'Dr. Neha Doshi', role: 'Head'}]}
+        ],
+        events: [
+            { type: 'Birthday', title: 'Happy Birthday to Anjali Furia!', date: 'July 26' },
+            { type: 'New Marriage', title: 'Rahul Vora & Tina Shah tied the knot!', date: 'July 24' },
+            { type: 'Death', title: 'In loving memory of Harshad bhai Gada.', date: 'July 22' },
+            { type: 'Tapsya', title: 'Anumodan for 8 Upvas by Sarlaben.', date: 'July 20' }
+        ],
+        jainSanghSubTree: { 'Jain Sangh Name': ['Maharaj Saheb details', 'Maha Satiji details', 'Dixa', 'History'] },
+        villageDetails: { 'Derasar': { image: 'assets/images/derasar.jpg', address: '123 Temple Road, Mandvi, Kutch', details: '...' }, 'Hospital': { image: 'assets/images/hospital.jpg', address: '456 Health St, Mandvi, Kutch', details: '...' } }
+    };
 
     // --- Element Selectors ---
-    const mainApp = document.getElementById('main-app');
-    const contentPages = document.querySelectorAll('.content-page');
-    const pageTitle = mainApp.querySelector('.page-title');
-    const backButton = mainApp.querySelector('.back-button');
-    const actionCards = document.querySelectorAll('.action-card, .moment-card');
+    const getStartedBtn = document.getElementById('login-register-btn');
+    const pageContainer = document.getElementById('page-container');
+    const pageTitle = document.querySelector('.page-title');
+    const backButton = document.querySelector('.back-button');
+    const loginSubmitBtn = document.getElementById('login-submit-btn');
+    const goToRegisterLink = document.getElementById('go-to-register');
+    const goToLoginLink = document.getElementById('go-to-login');
+    const addEntryBtn = document.getElementById('add-entry-btn');
+    const closeBtn = document.querySelector('.close-btn');
 
-    // --- Dynamic Content Rendering Functions ---
+    let navigationStack = [];
+    let currentVillage = 'Mandvi'; // Default village after login
 
-    function renderMembers() {
-        const list = document.querySelector('.member-list');
-        list.innerHTML = members.map(member => `
-            <div class="member-card">
-                <img src="${member.avatar}" alt="${member.name}">
-                <div class="member-info">
-                    <h4>${member.name}</h4>
-                    <p>${member.location}</p>
-                </div>
-                <div class="view-btn">View</div>
-            </div>
-        `).join('');
+    // --- Core Functions ---
+    function showScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(screenId).classList.add('active');
     }
+    function updateHeader(title, showBack) { pageTitle.textContent = title; backButton.style.display = showBack ? 'block' : 'none'; }
 
-    function renderCommittees() {
-        const container = document.getElementById('committee-content');
-        container.innerHTML = committees.map(committee => `
-            <div class="committee-card">
-                <div class="committee-header">
-                    <h4>${committee.name}</h4>
-                    <i class="material-icons-sharp">expand_more</i>
-                </div>
-                <div class="committee-members">
-                    ${committee.members.map(member => `
-                        <div class="committee-member">
-                            <img src="assets/images/user-avatar.jpg" alt="${member.name}">
-                            <div class="role">${member.name}<span>${member.role}</span></div>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-        `).join('');
-        // Add event listeners for expansion
-        container.querySelectorAll('.committee-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const card = header.parentElement;
-                card.classList.toggle('expanded');
-                const membersDiv = card.querySelector('.committee-members');
-                if (card.classList.contains('expanded')) {
-                    membersDiv.style.maxHeight = membersDiv.scrollHeight + 'px';
-                } else {
-                    membersDiv.style.maxHeight = '0';
-                }
-            });
-        });
-    }
-    
-    function renderGallery() {
-        const grid = document.querySelector('.album-grid');
-        grid.innerHTML = albums.map(album => `
-             <div class="album-card">
-                <img src="${album.cover}" alt="${album.name}">
-                <h4>${album.name}</h4>
-                <p>${album.count} photos</p>
-            </div>
-        `).join('');
-    }
-
-    function renderJobs() {
-        const list = document.querySelector('.job-list');
-        list.innerHTML = jobs.map(job => `
-            <div class="job-card">
-                <div class="job-card-header">
-                    <div>
-                        <h4 class="job-title">${job.title}</h4>
-                        <p class="job-company">${job.company}</p>
-                    </div>
-                    <div class="job-type">${job.type}</div>
-                </div>
-                <div class="job-card-footer">
-                    <span class="job-location">${job.location}</span>
-                    <a href="#" class="apply-btn">Apply</a>
-                </div>
-            </div>
-        `).join('');
-    }
-    
-    function renderWishes() {
-        const bdayList = document.querySelector('.birthday-wish-list');
-        bdayList.innerHTML = birthdayWishes.map(p => `
-            <div class="birthday-card">
-                <img src="${p.avatar}" alt="${p.name}">
-                <div class="birthday-info"><p>${p.name}</p><span>Wish them a great year!</span></div>
-                <div class="wish-btn">Wish</div>
-            </div>
-        `).join('');
-
-        const tributeList = document.querySelector('.tribute-list');
-        tributeList.innerHTML = tributes.map(t => `
-             <div class="tribute-card-small">
-                <img src="${t.avatar}" alt="${t.name}">
-                <div class="tribute-info"><p>${t.name}</p><span>Remembering a Legacy: ${t.date}</span></div>
-            </div>
-        `).join('');
-    }
-
-
-    // --- Navigation Logic ---
-
-    function showPage(pageId, title) {
-        contentPages.forEach(p => p.classList.remove('active'));
-        document.getElementById(pageId).classList.add('active');
-        
-        pageTitle.textContent = title;
-        if(pageId === 'home-content') {
-            backButton.style.display = 'none';
+    // --- Dynamic Page Rendering Engine ---
+    function renderPage(state) {
+        const { pageData, title } = state;
+        let content = '';
+        if (pageData.type === 'village-dashboard') {
+            content = `<div class="village-banner" style="background-image: url('assets/images/village-banner.jpg')"><h3>${title}</h3></div><div class="category-grid">${Object.entries(samajData.structure).map(([key, value]) => `<div class="category-card" data-category="${key}"><div class="category-icon"><i class="material-icons-sharp">${value.icon}</i></div><h4>${key}</h4></div>`).join('')}</div>`;
+        } else if (pageData.type === 'subcategory-list') {
+            content = `<div class="list-page">${pageData.items.map(item => `<div class="list-item" data-subcategory="${item}"><h4>${item}</h4><i class="material-icons-sharp ${pageData.permissionRequired ? 'lock-icon' : ''}">${pageData.permissionRequired ? 'lock' : 'arrow_forward_ios'}</i></div>`).join('')}</div>`;
+        } else if (pageData.type === 'member-directory') {
+            content = `<div class="filter-tabs"><div class="filter-tab active">All</div><div class="filter-tab">Male</div><div class="filter-tab">Female</div><div class="filter-tab">Kids</div></div><div class="member-list">${samajData.members.map(m => `<div class="member-card"><img src="${m.avatar}" alt="${m.name}"><div class="member-info"><h4>${m.name}</h4><p class="status">${m.status}</p></div></div>`).join('')}</div>`;
+        } else if (pageData.type === 'committee-list') {
+            content = `<div class="list-page">${samajData.committees.map(c => `<div class="committee-card"><div class="committee-header"><h4>${c.name}</h4><i class="material-icons-sharp">expand_more</i></div><div class="committee-members">${c.members.map(m => `<div class="committee-member"><img src="assets/images/user-avatar.jpg" alt="${m.name}"><div class="role">${m.name}<span>${m.role}</span></div></div>`).join('')}</div></div>`).join('')}</div>`;
+        } else if (pageData.type === 'event-list') {
+            const eventType = pageData.eventType;
+            content = `<div class="list-page">${samajData.events.filter(e => e.type === eventType).map(e => `<div class="event-card ${e.type.toLowerCase()}"><i class="material-icons-sharp event-icon">cake</i><div class="event-details"><h4>${e.title}</h4></div><p class="event-date">${e.date}</p></div>`).join('')}</div>`;
         } else {
-            backButton.style.display = 'block';
+            const detail = samajData.villageDetails[title] || { image: 'assets/images/placeholder.jpg', address: 'Details not available.', details: `This is the content page for ${title}.` };
+            content = `<div class="content-detail-page"><div class="detail-image-header" style="background-image: url('${detail.image}')"></div><h3 class="detail-title">${title}</h3><div class="detail-section"><h5>Address</h5><p>${detail.address}</p></div><div class="detail-section"><h5>Details</h5><p>${detail.details}</p></div></div>`;
         }
+        pageContainer.innerHTML = content;
+        updateHeader(title, navigationStack.length > 1);
     }
-
-    // Home screen action cards navigation
-    actionCards.forEach(card => {
-        card.addEventListener('click', () => {
-            const targetPage = card.dataset.target;
-            const title = card.dataset.title;
-            if(targetPage) {
-                showPage(targetPage, title);
-            }
-        });
-    });
-
-    // Back button functionality
-    backButton.addEventListener('click', () => {
-        showPage('home-content', 'Home');
+    
+    // --- Navigation Logic ---
+    function navigateTo(state) { navigationStack.push(state); renderPage(state); }
+    function goBack() { if (navigationStack.length > 1) { navigationStack.pop(); renderPage(navigationStack[navigationStack.length - 1]); } }
+    
+    // --- Event Listeners ---
+    getStartedBtn.addEventListener('click', () => showScreen('login-screen'));
+    goToRegisterLink.addEventListener('click', (e) => { e.preventDefault(); showScreen('registration-screen'); });
+    goToLoginLink.addEventListener('click', (e) => { e.preventDefault(); showScreen('login-screen'); });
+    loginSubmitBtn.addEventListener('click', () => {
+        const homeState = { title: currentVillage, pageData: { type: 'village-dashboard' } };
+        navigationStack = [homeState];
+        renderPage(homeState);
+        showScreen('main-app-screen');
     });
     
-    // --- Initial Render Call ---
-    renderMembers();
-    renderCommittees();
-    renderGallery();
-    renderJobs();
-    renderWishes();
+    document.getElementById('registration-form').addEventListener('submit', (e) => { e.preventDefault(); alert('Registration successful! Please login.'); showScreen('login-screen'); });
+    addEntryBtn.addEventListener('click', () => showScreen('add-entry-screen'));
+    if(closeBtn) closeBtn.addEventListener('click', () => showScreen('main-app-screen'));
 
+    pageContainer.addEventListener('click', e => {
+        const categoryCard = e.target.closest('.category-card');
+        const subcategoryItem = e.target.closest('.list-item');
+        const committeeHeader = e.target.closest('.committee-header');
+        
+        if (committeeHeader) {
+            const card = committeeHeader.parentElement;
+            card.classList.toggle('expanded');
+            const membersDiv = card.querySelector('.committee-members');
+            membersDiv.style.maxHeight = card.classList.contains('expanded') ? membersDiv.scrollHeight + 'px' : '0';
+        }
+
+        if (categoryCard) {
+            const categoryName = categoryCard.dataset.category;
+            const categoryData = samajData.structure[categoryName];
+            if (categoryData.permissionRequired) { alert('Admin permission required.'); return; }
+            navigateTo({ title: categoryName, pageData: { type: categoryData.subcategories ? 'subcategory-list' : 'content-detail', items: categoryData.subcategories, permissionRequired: categoryData.permissionRequired } });
+        }
+        if (subcategoryItem) {
+            const subName = subcategoryItem.dataset.subcategory;
+            const jainSanghSubTree = samajData.jainSanghSubTree[subName];
+            if (jainSanghSubTree) navigateTo({ title: subName, pageData: { type: 'subcategory-list', items: jainSanghSubTree } });
+            else if (subName === 'Members List') navigateTo({ title: 'Member Directory', pageData: { type: 'member-directory' } });
+            else if (subName === 'Mahajan Committee List') navigateTo({ title: 'Committee Lists', pageData: { type: 'committee-list' } });
+            else if (['Birthday', 'New Marriage'].includes(subName)) navigateTo({ title: subName, pageData: { type: 'event-list', eventType: subName } });
+            else navigateTo({ title: subName, pageData: { type: 'content-detail' } });
+        }
+    });
+
+    backButton.addEventListener('click', goBack);
+    
+    // --- Initial Call ---
+    const villageSelect = document.querySelector('select[name="village"]');
+    villageSelect.innerHTML = `<option value="">-- Select Village --</option>` + samajData.villages.map(v => `<option value="${v}">${v}</option>`).join('');
 });
+
+
+
+
+
+
+
+
+
+
+
+
