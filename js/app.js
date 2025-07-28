@@ -1,144 +1,202 @@
-// === The Digital Legacy: The Complete & Final JavaScript Logic ===
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Mock Data Structure (The Heart of the App) ---
+    // --- The Complete Data Structure for the Entire App ---
     const samajData = {
-        villages: ['Mandvi', 'Bhuj', 'Anjar', 'Naliya'],
-        structure: {
-            'Jain Sandh': { icon: 'groups', subcategories: ['Members List', 'Mahajan Committee List'] },
-            'Matrimony': { icon: 'favorite', subcategories: ['New Marriage', 'Engagement', 'Boy', 'Girls', 'Divorced', 'Widower', 'Widow'], permissionRequired: true },
-            'Life Events': { icon: 'cake', subcategories: ['Birthday', 'Marriage Anniversary', 'New Born Baby', 'New Opening'] },
-            'Dharmik': { icon: 'brightness_7', subcategories: ['Jain Sangh Name', 'Tapsya', 'Pratika', 'Chomasa', 'Sheshkar'] },
-            'Daily Updates': { icon: 'newspaper', subcategories: ['Newspaper', 'Panchang', 'Congratulations', 'Thankyou', 'Social'] },
-            'Village Info': { icon: 'location_city', subcategories: ['History', 'Derasar', 'Hospital', 'Library', 'School', 'Bank', 'Police Station', 'Post Office', 'Gram Panchayat'] },
-            'Death / Condolence': { icon: 'info', isDirectContent: true, },
-        },
+        homeCategories: [
+            { name: 'The Village Name', icon: 'location_city', id: 'village' },
+            { name: 'Jain Sandh', icon: 'groups', id: 'jain_sandh' },
+            { name: 'Death', icon: 'people', id: 'Death' },
+           
+            { name: 'Matrimony', icon: 'favorite', id: 'matrimony' },
+            { name: 'New Marriage', icon: 'celebration', id: 'new_marriage' },
+            { name: 'Engagement', icon: 'ring_volume', id: 'engagement' },
+            { name: 'New Born Baby', icon: 'child_care', id: 'new_born' },
+            { name: 'Condolence', icon: 'sick', id: 'condolence' },
+            { name: 'Anniversary', icon: 'cake', id: 'anniversary' },
+            { name: 'Birthday', icon: 'emoji_events', id: 'birthday' },
+            { name: 'New Opening', icon: 'store', id: 'new_opening' },
+            { name: 'Social', icon: 'people', id: 'social' },
+            { name: 'Dharmik', icon: 'brightness_7', id: 'dharmik' },
+            { name: 'Tapsya', icon: 'self_improvement', id: 'tapsya' },
+            { name: 'Congratulations', icon: 'thumb_up', id: 'congrats' },
+             { name: 'Thankyou', icon: 'thumb_up', id: 'congrats' },
+            { name: 'Medical', icon: 'local_hospital', id: 'medical' },
+             { name: 'Panchang', icon: 'emoji_events', id: 'medical' },
+              { name: 'Pratika', icon: 'newspaper', id: 'medical' },
+            { name: 'Newspaper', icon: 'newspaper', id: 'newspaper' },
+        ],
+        villages: ['Mandvi', 'Bhuj', 'Koday', 'Anjar', 'Naliya', 'Bidada'],
+        villageStructure: [
+            { name: 'History', icon: 'landmark' },
+            { name: 'Mahajan Committee List', icon: 'gavel' },
+            { name: 'Members List', icon: 'contacts' },
+            { name: 'Derasar', icon: 'account_balance' },
+            { name: 'Sathank', icon: 'church' },
+            { name: 'Bhojanalay', icon: 'restaurant' },
+            { name: 'Hospital', icon: 'medical_services' },
+            { name: 'Library', icon: 'local_library' },
+            { name: 'School', icon: 'school' },
+            { name: 'Bank', icon: 'atm' },
+            { name: 'Police Station', icon: 'local_police' },
+            { name: 'Post Office', icon: 'local_post_office' },
+            { name: 'Gram Panchayat', icon: 'domain' },
+        ],
+        mahajanSubCommittees: ['Derasar Committee', 'Bhojanshala Committee', 'Sathank Committee', 'Hospital Committee', 'Mahila Committee', 'Education Committee'],
         members: [
-            { name: 'Ramesh Shah', village: 'Mandvi', status: 'Male', avatar: 'assets/images/user-avatar.jpg' },
-            { name: 'Priya Mehta', village: 'Mandvi', status: 'Female', avatar: 'assets/images/user-avatar.jpg' },
-            { name: 'Aarav Gada', village: 'Mandvi', status: 'Kids', avatar: 'assets/images/user-avatar.jpg' }
+            { name: 'Ramesh Shah', id: 'KJS-001', avatar: 'assets/images/user-avatar.jpg', type: 'Male' },
+            { name: 'Priya Mehta', id: 'KJS-002', avatar: 'assets/images/user-avatar.jpg', type: 'Female' },
+            { name: 'Aarav Gada', id: 'KJS-003', avatar: 'assets/images/user-avatar.jpg', type: 'Kids' }
         ],
-        committees: [
-            { name: 'Derasar Committee', members: [{name: 'Ashok Shah', role: 'President'}, {name: 'Vimal Mehta', role: 'Secretary'}]},
-            { name: 'Education Committee', members: [{name: 'Dr. Neha Doshi', role: 'Head'}]}
-        ],
-        events: [
-            { type: 'Birthday', title: 'Happy Birthday to Anjali Furia!', date: 'July 26' },
-            { type: 'New Marriage', title: 'Rahul Vora & Tina Shah tied the knot!', date: 'July 24' },
-            { type: 'Death', title: 'In loving memory of Harshad bhai Gada.', date: 'July 22' },
-            { type: 'Tapsya', title: 'Anumodan for 8 Upvas by Sarlaben.', date: 'July 20' }
-        ],
-        jainSanghSubTree: { 'Jain Sangh Name': ['Maharaj Saheb details', 'Maha Satiji details', 'Dixa', 'History'] },
-        villageDetails: { 'Derasar': { image: 'assets/images/derasar.jpg', address: '123 Temple Road, Mandvi, Kutch', details: '...' }, 'Hospital': { image: 'assets/images/hospital.jpg', address: '456 Health St, Mandvi, Kutch', details: '...' } }
+        jainSanghs: ['Shri 6 Koti Sthanakvasi', 'Shri 8 Koti Nani Paksh', 'Shri Tapā Gaccha', 'Shri Achal Gaccha'],
+        jainSanghSubTree: ['Maharaj Saheb details', 'Maha Satiji details', 'Dixa', 'Chomasa', 'Sheshkar', 'History'],
+        matrimonyCategories: ['Boy', 'Girls', 'Divorced', 'Widower', 'Widow']
     };
 
     // --- Element Selectors ---
-    const getStartedBtn = document.getElementById('login-register-btn');
     const pageContainer = document.getElementById('page-container');
     const pageTitle = document.querySelector('.page-title');
     const backButton = document.querySelector('.back-button');
     const loginSubmitBtn = document.getElementById('login-submit-btn');
-    const goToRegisterLink = document.getElementById('go-to-register');
-    const goToLoginLink = document.getElementById('go-to-login');
-    const addEntryBtn = document.getElementById('add-entry-btn');
-    const closeBtn = document.querySelector('.close-btn');
 
     let navigationStack = [];
-    let currentVillage = 'Mandvi'; // Default village after login
 
     // --- Core Functions ---
-    function showScreen(screenId) {
+    const showScreen = (screenId) => {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById(screenId).classList.add('active');
-    }
-    function updateHeader(title, showBack) { pageTitle.textContent = title; backButton.style.display = showBack ? 'block' : 'none'; }
+    };
 
-    // --- Dynamic Page Rendering Engine ---
-    function renderPage(state) {
-        const { pageData, title } = state;
+    const updateHeader = (title, showBack) => {
+        pageTitle.textContent = title;
+        backButton.style.display = showBack ? 'block' : 'none';
+    };
+
+    // --- Page Rendering Engine ---
+    const renderPage = (state) => {
+        pageContainer.innerHTML = ''; // Clear previous content
         let content = '';
-        if (pageData.type === 'village-dashboard') {
-            content = `<div class="village-banner" style="background-image: url('assets/images/village-banner.jpg')"><h3>${title}</h3></div><div class="category-grid">${Object.entries(samajData.structure).map(([key, value]) => `<div class="category-card" data-category="${key}"><div class="category-icon"><i class="material-icons-sharp">${value.icon}</i></div><h4>${key}</h4></div>`).join('')}</div>`;
-        } else if (pageData.type === 'subcategory-list') {
-            content = `<div class="list-page">${pageData.items.map(item => `<div class="list-item" data-subcategory="${item}"><h4>${item}</h4><i class="material-icons-sharp ${pageData.permissionRequired ? 'lock-icon' : ''}">${pageData.permissionRequired ? 'lock' : 'arrow_forward_ios'}</i></div>`).join('')}</div>`;
-        } else if (pageData.type === 'member-directory') {
-            content = `<div class="filter-tabs"><div class="filter-tab active">All</div><div class="filter-tab">Male</div><div class="filter-tab">Female</div><div class="filter-tab">Kids</div></div><div class="member-list">${samajData.members.map(m => `<div class="member-card"><img src="${m.avatar}" alt="${m.name}"><div class="member-info"><h4>${m.name}</h4><p class="status">${m.status}</p></div></div>`).join('')}</div>`;
-        } else if (pageData.type === 'committee-list') {
-            content = `<div class="list-page">${samajData.committees.map(c => `<div class="committee-card"><div class="committee-header"><h4>${c.name}</h4><i class="material-icons-sharp">expand_more</i></div><div class="committee-members">${c.members.map(m => `<div class="committee-member"><img src="assets/images/user-avatar.jpg" alt="${m.name}"><div class="role">${m.name}<span>${m.role}</span></div></div>`).join('')}</div></div>`).join('')}</div>`;
-        } else if (pageData.type === 'event-list') {
-            const eventType = pageData.eventType;
-            content = `<div class="list-page">${samajData.events.filter(e => e.type === eventType).map(e => `<div class="event-card ${e.type.toLowerCase()}"><i class="material-icons-sharp event-icon">cake</i><div class="event-details"><h4>${e.title}</h4></div><p class="event-date">${e.date}</p></div>`).join('')}</div>`;
-        } else {
-            const detail = samajData.villageDetails[title] || { image: 'assets/images/placeholder.jpg', address: 'Details not available.', details: `This is the content page for ${title}.` };
-            content = `<div class="content-detail-page"><div class="detail-image-header" style="background-image: url('${detail.image}')"></div><h3 class="detail-title">${title}</h3><div class="detail-section"><h5>Address</h5><p>${detail.address}</p></div><div class="detail-section"><h5>Details</h5><p>${detail.details}</p></div></div>`;
+
+        switch (state.page) {
+            case 'home':
+                content = `<div class="category-grid">${samajData.homeCategories.map(cat => `
+                    <div class="category-card" data-page-id="${cat.id}" data-page-title="${cat.name}">
+                        <div class="category-icon"><i class="material-icons-sharp">${cat.icon}</i></div>
+                        <h4>${cat.name}</h4>
+                    </div>`).join('')}</div>`;
+                updateHeader('Home', false);
+                break;
+            
+            case 'villageSelector':
+                content = `<div class="village-selector-page">
+                    <h3>Select your village</h3>
+                    <select id="village-dropdown">
+                        <option value="">-- Choose Village --</option>
+                        ${samajData.villages.map(v => `<option value="${v}">${v}</option>`).join('')}
+                    </select>
+                </div>`;
+                updateHeader('Select Village', true);
+                break;
+                
+            case 'villageDashboard':
+                content = `<div class="category-grid">${samajData.villageStructure.map(cat => `
+                    <div class="category-card" data-page-id="${cat.name.replace(/ /g, '_')}" data-page-title="${cat.name}">
+                        <div class="category-icon"><i class="material-icons-sharp">${cat.icon}</i></div>
+                        <h4>${cat.name}</h4>
+                    </div>`).join('')}</div>`;
+                updateHeader(state.village, true);
+                break;
+
+            case 'subCategoryList':
+                content = `<div class="list-page">${state.items.map(item => `
+                    <div class="list-item" data-page-id="${item.replace(/ /g, '_')}" data-page-title="${item}">
+                        <h4>${item}</h4><i class="material-icons-sharp">arrow_forward_ios</i>
+                    </div>`).join('')}</div>`;
+                updateHeader(state.title, true);
+                break;
+            
+            case 'memberList':
+                 content = `<div class="member-list">${samajData.members.map(m => `
+                    <div class="member-card">
+                        <img src="${m.avatar}" alt="${m.name}">
+                        <div class="member-info">
+                            <h4>${m.name}</h4>
+                            <p>${m.type}</p>
+                            <span class="member-id">${m.id}</span>
+                        </div>
+                    </div>`).join('')}</div>`;
+                updateHeader(state.title, true);
+                break;
+
+            default:
+                content = `<h2>${state.title}</h2><p>Content for this page will be displayed here.</p>`;
+                updateHeader(state.title, true);
         }
+        
         pageContainer.innerHTML = content;
-        updateHeader(title, navigationStack.length > 1);
-    }
+    };
     
     // --- Navigation Logic ---
-    function navigateTo(state) { navigationStack.push(state); renderPage(state); }
-    function goBack() { if (navigationStack.length > 1) { navigationStack.pop(); renderPage(navigationStack[navigationStack.length - 1]); } }
+    const navigateTo = (state) => {
+        navigationStack.push(state);
+        renderPage(state);
+    };
+
+    const goBack = () => {
+        if (navigationStack.length > 1) {
+            navigationStack.pop();
+            renderPage(navigationStack[navigationStack.length - 1]);
+        }
+    };
     
     // --- Event Listeners ---
-    getStartedBtn.addEventListener('click', () => showScreen('login-screen'));
-    goToRegisterLink.addEventListener('click', (e) => { e.preventDefault(); showScreen('registration-screen'); });
-    goToLoginLink.addEventListener('click', (e) => { e.preventDefault(); showScreen('login-screen'); });
     loginSubmitBtn.addEventListener('click', () => {
-        const homeState = { title: currentVillage, pageData: { type: 'village-dashboard' } };
+        const homeState = { page: 'home' };
         navigationStack = [homeState];
         renderPage(homeState);
         showScreen('main-app-screen');
     });
     
-    document.getElementById('registration-form').addEventListener('submit', (e) => { e.preventDefault(); alert('Registration successful! Please login.'); showScreen('login-screen'); });
-    addEntryBtn.addEventListener('click', () => showScreen('add-entry-screen'));
-    if(closeBtn) closeBtn.addEventListener('click', () => showScreen('main-app-screen'));
+    backButton.addEventListener('click', goBack);
 
-    pageContainer.addEventListener('click', e => {
-        const categoryCard = e.target.closest('.category-card');
-        const subcategoryItem = e.target.closest('.list-item');
-        const committeeHeader = e.target.closest('.committee-header');
+    pageContainer.addEventListener('click', (e) => {
+        const card = e.target.closest('.category-card, .list-item');
+        if (!card) return;
+
+        const { pageId, pageTitle } = card.dataset;
+        let newState = {};
+
+        // Main Home Screen Navigation
+        if (navigationStack[navigationStack.length - 1].page === 'home') {
+            if (pageId === 'village') newState = { page: 'villageSelector' };
+            else if (pageId === 'jain_sandh') newState = { page: 'subCategoryList', title: 'Jain Sandh', items: samajData.jainSanghs };
+            else if (pageId === 'matrimony') newState = { page: 'subCategoryList', title: 'Matrimony', items: samajData.matrimonyCategories };
+            else newState = { page: 'content', title: pageTitle }; // For simple pages
+        } 
+        // Village Dashboard Navigation
+        else if(navigationStack[navigationStack.length-1].page === 'villageDashboard') {
+            if (pageId === 'Mahajan_Committee_List') newState = { page: 'subCategoryList', title: pageTitle, items: samajData.mahajanSubCommittees };
+            else if (pageId === 'Members_List') newState = { page: 'memberList', title: pageTitle };
+            else newState = { page: 'content', title: pageTitle };
+        }
+        // Jain Sandh Navigation
+        else if(navigationStack[navigationStack.length-1].title === 'Jain Sandh') {
+             newState = { page: 'subCategoryList', title: pageTitle, items: samajData.jainSanghSubTree };
+        }
+        // Generic Navigation
+        else {
+            newState = { page: 'content', title: pageTitle };
+        }
         
-        if (committeeHeader) {
-            const card = committeeHeader.parentElement;
-            card.classList.toggle('expanded');
-            const membersDiv = card.querySelector('.committee-members');
-            membersDiv.style.maxHeight = card.classList.contains('expanded') ? membersDiv.scrollHeight + 'px' : '0';
-        }
+        navigateTo(newState);
+    });
 
-        if (categoryCard) {
-            const categoryName = categoryCard.dataset.category;
-            const categoryData = samajData.structure[categoryName];
-            if (categoryData.permissionRequired) { alert('Admin permission required.'); return; }
-            navigateTo({ title: categoryName, pageData: { type: categoryData.subcategories ? 'subcategory-list' : 'content-detail', items: categoryData.subcategories, permissionRequired: categoryData.permissionRequired } });
-        }
-        if (subcategoryItem) {
-            const subName = subcategoryItem.dataset.subcategory;
-            const jainSanghSubTree = samajData.jainSanghSubTree[subName];
-            if (jainSanghSubTree) navigateTo({ title: subName, pageData: { type: 'subcategory-list', items: jainSanghSubTree } });
-            else if (subName === 'Members List') navigateTo({ title: 'Member Directory', pageData: { type: 'member-directory' } });
-            else if (subName === 'Mahajan Committee List') navigateTo({ title: 'Committee Lists', pageData: { type: 'committee-list' } });
-            else if (['Birthday', 'New Marriage'].includes(subName)) navigateTo({ title: subName, pageData: { type: 'event-list', eventType: subName } });
-            else navigateTo({ title: subName, pageData: { type: 'content-detail' } });
+    pageContainer.addEventListener('change', (e) => {
+        if (e.target.id === 'village-dropdown') {
+            const selectedVillage = e.target.value;
+            if (selectedVillage) {
+                navigateTo({ page: 'villageDashboard', village: selectedVillage });
+            }
         }
     });
 
-    backButton.addEventListener('click', goBack);
-    
-    // --- Initial Call ---
-    const villageSelect = document.querySelector('select[name="village"]');
-    villageSelect.innerHTML = `<option value="">-- Select Village --</option>` + samajData.villages.map(v => `<option value="${v}">${v}</option>`).join('');
 });
-
-
-
-
-
-
-
-
-
-
-
-
