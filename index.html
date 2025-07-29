@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Kutchi Jain Samaj</title>
+    <title>Kutchi Jain Samaj - Portal</title>
     <link rel="stylesheet" href="css/aurora-theme.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,50 +14,70 @@
 
     <div class="mobile-container">
 
-        <!-- Screen 1: Splash Screen (NEW) -->
+        <!-- Screen 1: Splash Screen -->
         <div id="splash-screen" class="screen active">
-            <div class="splash-content">
-                <img src="assets/images/homeimages/kvo jodo logo.png" alt="Logo" class="splash-logo">
-                <h1 class="splash-title">Kutchi Jain Samaj</h1>
-            </div>
+            <div class="splash-content"><img src="assets/images/homeimages/kvo jodo logo.png" alt="Logo" class="splash-logo"><h1 class="splash-title">Kutchi Jain Samaj</h1></div>
         </div>
 
         <!-- Screen 2: Login -->
         <div id="login-screen" class="screen">
             <header class="app-header standalone"><h3 class="page-title">Community Portal</h3></header>
-             <main class="content-area">
-                <form class="form-layout">
-                    <img src="assets/images/homeimages/kvo jodo logo.png" alt="Logo" class="logo">
-                    <h2 class="form-title">Welcome Back</h2>
-                    <input type="tel" placeholder="Mobile Number">
-                    <input type="password" placeholder="Password">
-                    <button type="button" id="login-submit-btn" class="btn btn-primary">Login</button>
-                    <p class="form-note">Demonstration: Click Login to proceed.</p>
-                </form>
+            <main class="content-area">
+                <form class="form-layout"><img src="assets/images/homeimages/kvo jodo logo.png" alt="Logo" class="logo"><h2 class="form-title">Welcome Back</h2><input type="tel" placeholder="Mobile Number"><input type="password" placeholder="Password"><button type="button" id="login-submit-btn" class="btn btn-primary">Login</button><p class="form-note">Demonstration: Click Login to proceed.</p></form>
             </main>
         </div>
 
-        <!-- Screen 3: The Main Application Shell -->
+        <!-- Screen 3: The Main Application Shell (WHERE ALL DYNAMIC CONTENT LIVES) -->
         <div id="main-app-screen" class="screen">
             <header class="app-header">
-                <div class="header-content">
-                    <i class="material-icons-sharp back-button">arrow_back_ios</i>
-                    <h3 class="page-title">Social</h3>
-                </div>
-                <div class="header-icons">
-                     <i class="material-icons-sharp" id="cart-button">shopping_cart</i>
-                     <span id="cart-count">0</span>
-                </div>
+                <div class="header-content"><i class="material-icons-sharp back-button">arrow_back_ios</i><h3 class="page-title">Social</h3></div>
+                <div class="header-icons"><i class="material-icons-sharp" id="cart-button">shopping_cart</i><span id="cart-count">0</span></div>
             </header>
             <main class="content-area">
                 <div id="page-container"></div>
             </main>
             <nav class="bottom-nav">
                 <div class="nav-item active" data-page="socialHome"><i class="material-icons-sharp">groups</i><span>Social</span></div>
-                <div class="nav-item" data-page="businessHome"><i class="material-icons-sharp">storefront</i><span>Business</span></div>
+                <div class="nav-item" data-page="businessRoleSelection"><i class="material-icons-sharp">storefront</i><span>Business</span></div>
                 <div class="nav-item" data-page="profile"><i class="material-icons-sharp">person</i><span>Profile</span></div>
             </nav>
         </div>
+
+        <!-- Screen 4: Seller Registration Form (A SEPARATE FULL SCREEN) -->
+        <div id="seller-registration-screen" class="screen">
+            <header class="app-header">
+                <div class="header-content"><i class="material-icons-sharp back-button-form">arrow_back_ios</i><h3 class="page-title">Become a Seller</h3></div>
+            </header>
+            <main class="content-area">
+                <form id="seller-registration-form" class="form-layout" style="padding-top: 1rem;">
+                    <input type="text" placeholder="Your Full Name" required>
+                    <input type="text" placeholder="Business Name" required>
+                    <textarea placeholder="Business Address" rows="3" required></textarea>
+                    <label for="logo-upload">Upload Business Logo</label>
+                    <input type="file" id="logo-upload" accept="image/*">
+                    <button type="submit" class="btn btn-primary">Register as Seller</button>
+                </form>
+            </main>
+        </div>
+
+        <!-- Screen 5: Add New Product Form (A SEPARATE FULL SCREEN) -->
+         <div id="add-product-screen" class="screen">
+            <header class="app-header">
+                <div class="header-content"><i class="material-icons-sharp back-button-form">arrow_back_ios</i><h3 class="page-title">List New Product</h3></div>
+            </header>
+            <main class="content-area">
+                <form id="add-product-form" class="form-layout" style="padding-top: 1rem;">
+                    <input type="text" placeholder="Product Name" required>
+                    <input type="number" placeholder="Price (₹)" required>
+                    <textarea placeholder="Product Description" rows="4" required></textarea>
+                    <select required><option value="">Select Category</option><option>Handicrafts</option><option>Foods</option><option>Apparel</option></select>
+                    <label for="product-images-upload">Upload Product Images</label>
+                    <input type="file" id="product-images-upload" accept="image/*" multiple>
+                    <button type="submit" class="btn btn-primary">Add Product</button>
+                </form>
+            </main>
+        </div>
+
     </div>
 
     <!-- The Brains of the App -->
