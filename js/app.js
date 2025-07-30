@@ -1,7 +1,20 @@
+
+
+
+
+
+
+
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- FINALIZED & COMPLETE APP DATA STRUCTURE ---
     const samajData = {
+        // --- SOCIAL MODULE DATA (FULL HIERARCHY) ---
         social: {
             homeCategories: [
                 { name: 'The Village Name', icon: 'location_city', id: 'village' }, { name: 'Jain Sandh', icon: 'groups', id: 'jain_sandh' }, { name: 'Death', icon: 'sick', id: 'death' }, { name: 'Matrimony', icon: 'favorite', id: 'matrimony' }, { name: 'New Marriage', icon: 'celebration', id: 'new_marriage' }, { name: 'Engagement', icon: 'ring_volume', id: 'engagement' }, { name: 'New Born Baby', icon: 'child_care', id: 'new_born' }, { name: 'Condolence', icon: 'sentiment_very_dissatisfied', id: 'condolence' }, { name: 'Anniversary', icon: 'cake', id: 'anniversary' }, { name: 'Birthday', icon: 'emoji_events', id: 'birthday' }, { name: 'New Opening', icon: 'store', id: 'new_opening' }, { name: 'Social', icon: 'people', id: 'social' }, { name: 'Dharmik', icon: 'brightness_7', id: 'dharmik' }, { name: 'Tapsya', icon: 'self_improvement', id: 'tapsya' }, { name: 'Congratulations', icon: 'thumb_up', id: 'congrats' }, { name: 'Thankyou', icon: 'volunteer_activism', id: 'thankyou' }, { name: 'Medical', icon: 'local_hospital', id: 'medical' }, { name: 'Panchang', icon: 'event', id: 'panchang' }, { name: 'Pratika', icon: 'book', id: 'pratika' }, { name: 'Newspaper', icon: 'newspaper', id: 'newspaper' },
@@ -18,18 +31,22 @@ document.addEventListener('DOMContentLoaded', () => {
             jainSanghSubTree: ['Maharaj Saheb details', 'Maha Satiji details', 'Dixa', 'Chomasa', 'Sheshkar', 'History'],
             matrimonyCategories: ['Boy', 'Girls', 'Divorced', 'Widower', 'Widow']
         },
+        // --- BUSINESS MODULE DATA ---
         business: {
+            sellers: [
+                { id: 1, name: 'Kutchi Handicrafts', sellerPhone: '919876543210' }, { id: 2, name: 'Samaj Foods', sellerPhone: '919876543211' }
+            ],
             categories: [
-                { id: 1, name: 'Handicrafts' }, { id: 2, name: 'Foods & Spices' }, { id: 3, name: 'Apparel' }, { id: 4, 'name': 'Decor' }
+                { id: 1, name: 'Handicrafts' }, { id: 2, name: 'Foods & Spices' }, { id: 3, name: 'Apparel' }, { id: 4, name: 'Decor' }
             ],
             products: [
-                { id: 101, name: 'Handmade Shawl', price: 2500, image: 'assets/images/homeimages/kvo jodo logo.png', categoryId: 1, desc: 'A beautiful shawl.' },
-                { id: 102, name: 'Spicy Mango Pickle', price: 280, image: 'assets/images/homeimages/kvo jodo logo.png', categoryId: 2, desc: 'Traditional pickle.' },
-                { id: 103, name: 'Wooden Elephant', price: 1200, image: 'assets/images/homeimages/kvo jodo logo.png', categoryId: 4, desc: 'Hand-carved decor.' },
-                { id: 104, name: 'Bandhani Kurta', price: 1800, image: 'assets/images/homeimages/kvo jodo logo.png', categoryId: 3, desc: 'Traditional attire.' },
-                { id: 105, name: 'Organic Turmeric', price: 350, image: 'assets/images/homeimages/kvo jodo logo.png', categoryId: 2, desc: 'Freshly ground.' },
+                { id: 101, name: 'Handmade Shawl', price: 2500, image: 'assets/images/homeimages/kvo jodo logo.png', categoryId: 1, sellerId: 1, desc: 'A beautiful shawl, hand-woven by local artisans with traditional Kutchi patterns.' },
+                { id: 102, name: 'Spicy Mango Pickle', price: 280, image: 'assets/images/homeimages/kvo jodo logo.png', categoryId: 2, sellerId: 2, desc: 'Homemade, traditional mango pickle with a perfect blend of hand-ground spices.' },
+                { id: 103, name: 'Wooden Elephant', price: 1200, image: 'assets/images/homeimages/kvo jodo logo.png', categoryId: 4, sellerId: 1, desc: 'Intricately hand-carved wooden elephant statue.' },
+                { id: 104, name: 'Bandhani Kurta', price: 1800, image: 'assets/images/homeimages/kvo jodo logo.png', categoryId: 3, sellerId: 1, desc: 'Vibrant and traditional Bandhani Kurta for men.' },
+                { id: 105, name: 'Organic Turmeric', price: 350, image: 'assets/images/homeimages/kvo jodo logo.png', categoryId: 2, sellerId: 2, desc: '100% organic and freshly ground turmeric powder.' },
+                { id: 106, name: 'Clay Pot Set', price: 950, image: 'assets/images/homeimages/kvo jodo logo.png', categoryId: 4, sellerId: 1, desc: 'A set of three beautifully painted clay pots.' }
             ],
-            cart: [],
         }
     };
 
@@ -70,9 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             case 'businessHome':
                 const currentFilter = state.filter || 'all';
-                const productsToDisplay = currentFilter === 'all'
-                    ? samajData.business.products
-                    : samajData.business.products.filter(p => p.categoryId === currentFilter);
+                const productsToDisplay = currentFilter === 'all' ? samajData.business.products : samajData.business.products.filter(p => p.categoryId === currentFilter);
                 content = `
                     <div class="business-home-page">
                         <input type="text" class="search-bar" placeholder="Search for products...">
@@ -81,11 +96,26 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${samajData.business.categories.map(cat => `<div class="category-filter-tab ${currentFilter === cat.id ? 'active' : ''}" data-category-id="${cat.id}">${cat.name}</div>`).join('')}
                         </div>
                         <h3 class="section-title">Products</h3>
-                        <div class="product-grid">
-                            ${productsToDisplay.length > 0 ? productsToDisplay.map(p => `<div class="product-card" data-product-id="${p.id}"><img src="${p.image}" alt="${p.name}"><div class="product-info"><h5>${p.name}</h5><p class="product-price">₹${p.price}</p></div></div>`).join('') : '<p>No products found.</p>'}
-                        </div>
+                        <div class="product-grid">${productsToDisplay.map(p => `<div class="product-card" data-product-id="${p.id}"><img src="${p.image}" alt="${p.name}"><div class="product-info"><h5>${p.name}</h5><p class="product-price">₹${p.price}</p></div></div>`).join('')}</div>
                     </div>`;
                 updateHeader('Business', false); break;
+
+            case 'productDetail':
+                const product = samajData.business.products.find(p => p.id === state.productId);
+                const seller = samajData.business.sellers.find(s => s.id === product.sellerId);
+                const similarProducts = samajData.business.products.filter(p => p.categoryId === product.categoryId && p.id !== product.id);
+                const inquiryText = encodeURIComponent(`Hello, I am interested in buying your product: ${product.name} (ID: ${product.id})`);
+                const whatsappLink = `https://wa.me/${seller.sellerPhone}?text=${inquiryText}`;
+                content = `
+                    <div class="product-detail-page">
+                        <div class="product-image-slider"><img src="${product.image}" alt="${product.name}"></div>
+                        <div class="product-detail-content">
+                            <h2 class="product-detail-title">${product.name}</h2><p class="product-detail-price">₹${product.price}</p><p class="product-detail-desc">${product.desc}</p>
+                            <div class="action-buttons"><a href="${whatsappLink}" target="_blank" class="btn contact-seller">Contact Seller</a><a href="${whatsappLink}" target="_blank" class="btn whatsapp"><i class="material-icons-sharp">whatsapp</i>Buy Now</a></div>
+                        </div>
+                        <div class="similar-products-container"><h3 class="section-title">Similar Products</h3><div class="product-grid">${similarProducts.map(p => `<div class="product-card" data-product-id="${p.id}"><img src="${p.image}" alt="${p.name}"><div class="product-info"><h5>${p.name}</h5><p class="product-price">₹${p.price}</p></div></div>`).join('')}</div></div>
+                    </div>`;
+                updateHeader('Details', true); break;
 
             default: content = `<h2>${state.title || 'Page Not Found'}</h2><p>Content under construction.</p>`; updateHeader(state.title || 'Error', true);
         }
@@ -96,25 +126,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const navigateTo = (state) => { navigationStack.push(state); renderPage(state); };
     const goBack = () => { if (navigationStack.length <= 1) return; navigationStack.pop(); renderPage(navigationStack[navigationStack.length - 1]); };
     
-    // Main Click Handler
+    // --- UNIFIED CLICK HANDLER ---
     pageContainer.addEventListener('click', (e) => {
         // Business Module Logic: Category Filtering
         const filterTab = e.target.closest('.category-filter-tab');
         if (filterTab) {
             const categoryId = filterTab.dataset.categoryId === 'all' ? 'all' : parseInt(filterTab.dataset.categoryId);
-            const currentState = navigationStack[navigationStack.length - 1];
-            currentState.filter = categoryId; // Update the filter on the current state
-            renderPage(currentState); // Re-render the same page with the filter
+            navigationStack[navigationStack.length - 1].filter = categoryId;
+            renderPage(navigationStack[navigationStack.length - 1]);
             return;
         }
 
-        // General Click Logic
         const card = e.target.closest('.category-card, .list-item, .product-card');
         if (!card) return;
 
-        if (card.matches('.product-card')) { alert(`Product Detail for ID: ${card.dataset.productId}`); return; }
-
-        // Social Logic (Hierarchical)
+        if (card.matches('.product-card')) {
+            navigateTo({ page: 'productDetail', productId: parseInt(card.dataset.productId) });
+            return;
+        }
+        
+        // Social Module Logic (Hierarchical)
         const { pageId, pageTitle } = card.dataset;
         const currentState = navigationStack[navigationStack.length - 1];
         let newState = {};
