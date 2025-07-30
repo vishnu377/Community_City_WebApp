@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- BUSINESS MODULE DATA ---
         business: {
             sellers: [
-                { id: 1, name: 'Kutchi Handicrafts', sellerPhone: '919876543210' }, { id: 2, name: 'Samaj Foods', sellerPhone: '919876543211' }
+                { id: 1, name: 'Kutchi Handicrafts', sellerPhone: '9725463362' }, { id: 2, name: 'Samaj Foods', sellerPhone: '919876543211' }
             ],
             categories: [
                 { id: 1, name: 'Handicrafts' }, { id: 2, name: 'Foods & Spices' }, { id: 3, name: 'Apparel' }, { id: 4, name: 'Decor' }
